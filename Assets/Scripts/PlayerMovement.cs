@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpSpeed = 8f;
     private float horizontalInput;
     private bool isOnGround = true;
+    private bool isMoving = false;
     private Rigidbody2D playerRb;
     private float xMin = -11f;
     private bool faceRight = true;
@@ -19,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     // Reflect 
     private GameObject reflection;
     private SpriteRenderer reflectionSprite;
+    private Animator reflectionAnim;
+
+    // Animator
+    private Animator playerAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -27,21 +33,37 @@ public class PlayerMovement : MonoBehaviour
         reflection = GameObject.FindGameObjectWithTag("Reflection");
         playerSprite = GetComponent<SpriteRenderer>();
         reflectionSprite = reflection.GetComponent<SpriteRenderer>();
+        playerAnim = GetComponent<Animator>();
+        reflectionAnim = reflection.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerAnim.SetBool("isOnGround", isOnGround);
+        playerAnim.SetBool("isMoving", isMoving);
+        reflectionAnim.SetBool("isOnGround", isOnGround);
+        reflectionAnim.SetBool("isMoving", isMoving);
+
         horizontalInput = Input.GetAxisRaw("Horizontal"); 
         if (horizontalInput > 0 && !faceRight || horizontalInput < 0 && faceRight)
         {
             changeDirection();
+        }
+
+        if (horizontalInput != 0)
+        {
+            isMoving = true;
+        } else
+        {
+            isMoving = false;
         }
  
 
         if (Input.GetButtonDown("Jump") && isOnGround)
         {
             jump = true;
+            
         }
 
         if (transform.position.x < xMin)
@@ -58,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
             playerRb.gravityScale *= -1;
 
         }
+
+        
     }
 
     void changeDirection()
@@ -77,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRb.AddForce(transform.up * jumpSpeed, ForceMode2D.Impulse);
             isOnGround = false;
+            playerAnim.SetBool("jump", jump);
+            reflectionAnim.SetBool("jump", jump);
             jump = false;
         }
     }
@@ -86,6 +112,8 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Mirror"))
         {
             isOnGround = true;
+            playerAnim.SetBool("jump", jump);
+            reflectionAnim.SetBool("jump", jump);
         }
     }
 }
