@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +17,17 @@ public class GameManager : MonoBehaviour
     public TextMesh collectedShardsTxt;
     public TextMesh slash;
     public TextMesh progress;
+
+    public bool collectedAll;
+
+    public GameObject background;
+    public GameObject player;
+    public GameObject obstacles;
+    public GameObject mirror;
+    public SpriteRenderer mirrorWorld;
+    public GameObject newWorld;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +44,17 @@ public class GameManager : MonoBehaviour
         progress = GameObject.Find("Progress").GetComponent<TextMesh>();
 
         totalShardsTxt.text = totalMirrorShards.ToString();
+
+        collectedAll = false;
+
+        
+        background = GameObject.FindGameObjectWithTag("Background");
+        player = GameObject.FindGameObjectWithTag("Player");
+        obstacles = GameObject.FindGameObjectWithTag("Obstacles");
+        mirror = GameObject.FindGameObjectWithTag("Mirror");
+        mirrorWorld = GameObject.FindGameObjectWithTag("MirrorWorld").GetComponent<SpriteRenderer>();
+        newWorld = GameObject.Find("NewWorld");
+        newWorld.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,8 +68,23 @@ public class GameManager : MonoBehaviour
             totalShardsTxt.gameObject.SetActive(false);
             slash.gameObject.SetActive(false);
             progress.text = "You Got All the Shards!";
-
+            collectedAll = true;
+            
         }
+
+        
+    }
+
+    public void Cutscene()
+    {
+        progress.gameObject.SetActive(false);
+        background.SetActive(false);
+        player.SetActive(false);
+        obstacles.SetActive(false);
+        mirror.SetActive(false);
+        mirrorWorld.enabled = false;
+        newWorld.SetActive(true);
+        
     }
 
 }

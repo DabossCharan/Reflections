@@ -7,6 +7,9 @@ TagManager:
   - Mirror
   - Reflection
   - MirrorShard
+  - Background
+  - Obstacles
+  - MirrorWorld
   layers:
   - Default
   - TransparentFX

@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 6918766065323863226}
   - component: {fileID: 6918766065323863225}
   - component: {fileID: 6918766065323863224}
-  - component: {fileID: 6918766065323863228}
   - component: {fileID: 6918766065323863227}
   m_Layer: 0
-  m_Name: Mirror Shard
+  m_Name: MirrorShard
   m_TagString: MirrorShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6918766065323863223}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -4.54, y: 2.64, z: 0}
+  m_LocalPosition: {x: -4.54, y: 2.64, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,27 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527f663fb50c5c646b08b9d5277f34c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &6918766065323863228
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6918766065323863223}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!60 &6918766065323863227
 PolygonCollider2D:
   m_ObjectHideFlags: 0
