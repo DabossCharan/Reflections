@@ -114,6 +114,6 @@ public class PlayerMovement : MonoBehaviour
             isOnGround = true;
             playerAnim.SetBool("jump", jump);
             reflectionAnim.SetBool("jump", jump);
-        }
+        } 
     }
 }

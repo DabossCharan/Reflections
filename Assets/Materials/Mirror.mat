@@ -34,8 +34,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Origin: -0.05
-    - _Spread: 0.8
+    - _Origin: 0.2
+    - _Spread: -0.7
     m_Colors:
     - _Color1: {r: 1, g: 0, b: 0.8087482, a: 0}
     - _Color2: {r: 0, g: 0.8732948, b: 1, a: 0}
