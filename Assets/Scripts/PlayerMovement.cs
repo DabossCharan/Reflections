@@ -26,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
     // Animator
     private Animator playerAnim;
 
+    // SFX
+    private AudioSource playerAudio;
+    public AudioClip jumpSFX;
+    public AudioClip runSFX;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         reflectionSprite = reflection.GetComponent<SpriteRenderer>();
         playerAnim = GetComponent<Animator>();
         reflectionAnim = reflection.GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput != 0)
         {
             isMoving = true;
+            
         } else
         {
             isMoving = false;
@@ -63,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isOnGround)
         {
             jump = true;
-            
+            playerAudio.PlayOneShot(jumpSFX);
         }
 
         if (transform.position.x < xMin)
@@ -81,6 +89,13 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        if (isOnGround && horizontalInput != 0)
+        {
+            if (!playerAudio.isPlaying)
+            {
+                playerAudio.PlayOneShot(runSFX);
+            }
+        }
         
     }
 
@@ -114,6 +129,9 @@ public class PlayerMovement : MonoBehaviour
             isOnGround = true;
             playerAnim.SetBool("jump", jump);
             reflectionAnim.SetBool("jump", jump);
+            
         } 
+
+
     }
 }
