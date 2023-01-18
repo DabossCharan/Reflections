@@ -23,6 +23,10 @@ public class NextLevel : MonoBehaviour
     {
         if (collision.CompareTag("Player") && gameManager.collectedAll)
         {
+            if (SceneManager.GetActiveScene().buildIndex + 1 == SceneManager.sceneCountInBuildSettings - 1) 
+            {
+                gameManager.isLastScene = true;
+            }
             gameManager.Cutscene();
             StartCoroutine(WaitForSceneLoad());
 
@@ -31,8 +35,11 @@ public class NextLevel : MonoBehaviour
 
     private IEnumerator WaitForSceneLoad()
     {
-        yield return new WaitForSeconds(3
-            );
+        yield return new WaitForSeconds(4);
+        if (gameManager.isLastScene)
+        {
+            Application.Quit();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

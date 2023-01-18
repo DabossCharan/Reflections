@@ -9,6 +9,7 @@ public class MirrorShard : MonoBehaviour
     private Vector3 toPos;
     private float time;
     private float duration;
+    public bool hover = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,11 @@ public class MirrorShard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time = Mathf.PingPong(Time.time / duration, 1);
-        transform.position = Vector3.Lerp(startPos, toPos, time);
+        if (hover)
+        {
+            time = Mathf.PingPong(Time.time / duration, 1);
+            transform.position = Vector3.Lerp(startPos, toPos, time);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

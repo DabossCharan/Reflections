@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public TextMesh collectedShardsTxt;
     public TextMesh slash;
     public TextMesh progress;
+    public TextMesh newWorldTxt;
 
     public bool collectedAll;
 
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     public GameObject mirror;
     public SpriteRenderer mirrorWorld;
     public GameObject newWorld;
+
+    public bool isLastScene;
 
 
 
@@ -54,7 +57,10 @@ public class GameManager : MonoBehaviour
         mirror = GameObject.FindGameObjectWithTag("Mirror");
         mirrorWorld = GameObject.FindGameObjectWithTag("MirrorWorld").GetComponent<SpriteRenderer>();
         newWorld = GameObject.Find("NewWorld");
+        newWorldTxt = newWorld.GetComponent<TextMesh>();
         newWorld.SetActive(false);
+
+        isLastScene = false;
     }
 
     // Update is called once per frame
@@ -83,6 +89,10 @@ public class GameManager : MonoBehaviour
         obstacles.SetActive(false);
         mirror.SetActive(false);
         mirrorWorld.enabled = false;
+        if (isLastScene)
+        {
+            newWorldTxt.text = "It seems the end is near...";
+        }
         newWorld.SetActive(true);
         
     }

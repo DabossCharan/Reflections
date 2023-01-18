@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             playerSprite.flipX = !playerSprite.flipX;
             reflectionSprite.flipX = !reflectionSprite.flipX;
             playerRb.gravityScale *= -1;
-
+            playerRb.velocity = new Vector2(0, 0);
         }
 
         if (isOnGround && horizontalInput != 0)
@@ -95,6 +96,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerAudio.PlayOneShot(runSFX);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
     }
