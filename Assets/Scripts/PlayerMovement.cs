@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private float xMin = -11f;
     private bool faceRight = true;
     private bool jump = false;
+    private float jumpDelay;
     private SpriteRenderer playerSprite;
 
     // Reflect 
@@ -69,10 +70,11 @@ public class PlayerMovement : MonoBehaviour
         }
  
 
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetButtonDown("Jump") && isOnGround && Time.time > jumpDelay)
         {
             jump = true;
             playerAudio.PlayOneShot(jumpSFX);
+            jumpDelay = Time.time + 1f;
         }
 
         if (transform.position.x < xMin)
@@ -133,6 +135,10 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Mirror") || collision.gameObject.CompareTag("Obstacles"))
         {
             isOnGround = true;
+            if (jump)
+            {
+                playerRb.velocity = new Vector2(0, 0);
+            }
             playerAnim.SetBool("jump", jump);
             reflectionAnim.SetBool("jump", jump);
             

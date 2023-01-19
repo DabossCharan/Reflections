@@ -13,12 +13,6 @@ public class NextLevel : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && gameManager.collectedAll)
@@ -36,10 +30,8 @@ public class NextLevel : MonoBehaviour
     private IEnumerator WaitForSceneLoad()
     {
         yield return new WaitForSeconds(4);
-        if (gameManager.isLastScene)
-        {
-            Application.Quit();
-        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
+
 }
