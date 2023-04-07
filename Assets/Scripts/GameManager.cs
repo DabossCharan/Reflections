@@ -1,11 +1,6 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject background;
     public GameObject player;
-    public GameObject obstacles;
+    public GameObject[] obstacles;
     public GameObject mirror;
     public SpriteRenderer mirrorWorld;
     public GameObject newWorld;
@@ -53,7 +48,7 @@ public class GameManager : MonoBehaviour
         
         background = GameObject.FindGameObjectWithTag("Background");
         player = GameObject.FindGameObjectWithTag("Player");
-        obstacles = GameObject.FindGameObjectWithTag("Obstacles");
+        obstacles = GameObject.FindGameObjectsWithTag("Obstacles");
         mirror = GameObject.FindGameObjectWithTag("Mirror");
         mirrorWorld = GameObject.FindGameObjectWithTag("MirrorWorld").GetComponent<SpriteRenderer>();
         newWorld = GameObject.Find("NewWorld");
@@ -86,7 +81,11 @@ public class GameManager : MonoBehaviour
         progress.gameObject.SetActive(false);
         background.SetActive(false);
         player.SetActive(false);
-        obstacles.SetActive(false);
+
+        foreach(GameObject obstacle in obstacles)
+        {
+            obstacle.SetActive(false);
+        }
         mirror.SetActive(false);
         mirrorWorld.enabled = false;
         if (isLastScene)

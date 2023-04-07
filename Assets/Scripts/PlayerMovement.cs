@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
@@ -57,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal"); 
         if (horizontalInput > 0 && !faceRight || horizontalInput < 0 && faceRight)
         {
-            changeDirection();
+            ChangeDirection();
         }
 
         if (horizontalInput != 0)
@@ -107,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void changeDirection()
+    void ChangeDirection()
     {
         Vector3 currentScale = transform.localScale;
         currentScale.x *= -1;
